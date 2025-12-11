@@ -1,0 +1,139 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Library/refs/heads/main/redz-V5-remake/main.luau"))()
+
+-- WINDOW
+local Window = Library:MakeWindow({
+    Title = "example",
+    SubTitle = "by tlredz,
+    ScriptFolder = "redz-library-V5"
+})
+
+-- MINIMIZER
+local Minimizer = Window:NewMinimizer({
+    KeyCode = Enum.KeyCode.LeftControl
+})
+
+local MobileButton = Minimizer:CreateMobileMinimizer({
+    Image = "rbxassetid://0",
+    BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+})
+
+-- TAB
+local Tab = Window:MakeTab({
+    Title = "Cool Tab",
+    Icon = "Home"
+})
+
+-- DIALOG
+Window:Dialog({
+    Title = "Hello!",
+    Content = "do you like Coffee?",
+    Options = {
+        { Name = "No" },
+        {
+            Name = "Yes!",
+            Callback = function()
+                print("Yes, i like Coffee")
+            end
+        }
+    }
+})
+
+-- NOTIFY
+Window:Notify({
+    Title = "Notification",
+    Content = "this is a Notification",
+    Image = "rbxassetid://10734953451",
+    Duration = 5
+})
+
+-- SECTION
+Tab:AddSection("Main Controls")
+
+-- TOGGLE
+Tab:AddToggle({
+    Name = "Toggle",
+    Default = false,
+    Callback = function(Value)
+        print("Toggle:", Value)
+    end
+})
+
+-- BUTTON
+Tab:AddButton({
+    Name = "My Button",
+    Debounce = 0.5,
+    Callback = function()
+        print("Button pressed!")
+    end
+})
+
+-- SLIDER
+Tab:AddSlider({
+    Name = "Cool Slider",
+    Min = -5,
+    Max = 5,
+    Increment = 0.25,
+    Default = 0,
+    Callback = function(Value)
+        print("Slider:", Value)
+    end
+})
+
+-- DROPDOWN
+Tab:AddDropdown({
+    Name = "Dropdown",
+    Options = {"one", "two", "three", "four", "five"},
+    Default = "one",
+    Callback = function(Value)
+        print("Dropdown selected:", Value)
+    end
+})
+
+-- TEXTBOX
+Tab:AddTextBox({
+    Name = "My TextBox",
+    Default = "text",
+    Placeholder = "input text...",
+    ClearOnFocus = true,
+    Callback = function(Value)
+        print("TextBox:", Value)
+    end
+})
+
+-- PARAGRAPH
+Tab:AddParagraph("Paragraph", "This is a Paragraph\nSecond Line")
+
+
+-- SET UI SCALE
+Library:SetUIScale(1.0)
+
+print(string.format(
+    "UI Max Scale is: %s and the minimum is: %s",
+    Library:GetMaxScale(),
+    Library:GetMinScale()
+))
+
+Tab:AddSection("UI Settings")
+
+Tab:AddDropdown({
+    Name = "UI Scale",
+    Options = {
+        "Small",
+        "Medium",
+        "Large",
+        "Bigger"
+    },
+    Default = "Large",
+    Callback = function(value)
+        if value == "Small" then
+            Library:SetUIScale(0.8)
+        elseif value == "Medium" then
+            Library:SetUIScale(1.0)
+        elseif value == "Large" then
+            Library:SetUIScale(1.2)
+        elseif value == "Bigger" then
+            Library:SetUIScale(1.4)
+        end
+        print("UI scale set to:", value)
+    end
+})
